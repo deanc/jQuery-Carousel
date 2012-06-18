@@ -3,6 +3,10 @@ dcCarousel - a jQuery carousel plugin
 
 A jQuery plugin to create a carousel. Extremely lightweight (< 2kb), easily customizable using CSS.
 
+Screenshot
+---------------------
+![Screenshot](deanc.github.com/dcCarousel/screenshot.png)
+
 Usage
 ---------------------
 
