@@ -5,7 +5,7 @@ A jQuery plugin to create a carousel. Extremely lightweight (< 2kb), easily cust
 
 Screenshot
 ---------------------
-![Screenshot](deanc.github.com/dcCarousel/screenshot.png)
+![Screenshot](/screenshot.png "Screenshot")
 
 Usage
 ---------------------
