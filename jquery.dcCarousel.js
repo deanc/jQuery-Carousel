@@ -92,7 +92,6 @@
                     return false;
                 });
 				
-				console.log(totalPages);
 				if(settings.startPage > 1 && settings.startPage <= totalPages) {
 					$this.dcCarousel("changePage", settings.startPage, false);
 				}
