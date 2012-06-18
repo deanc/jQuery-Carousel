@@ -1,4 +1,4 @@
-A First Level Header
+dcCarousel - a jQuery carousel plugin
 ====================
 
 A jQuery plugin to create a carousel. Extremely lightweight (< 2kb), easily customizable using CSS.
