@@ -7,46 +7,50 @@
     var methods = {
         init : function( options ) {
             settings = $.extend( {
-                'perpage' : 5,
-                'width' : '800'
+                'perpage' : 5
+                ,'width' : '800'
+				,'showPager': true
+				,'animationSpeed': 1000
+				,'animationType': 'swing'
+				,'startPage': 1
             }, options);
 
             var self = this;
 
             // paging
-            return this.each(function(){
+            return this.each(function() {
                 var $this = $(this);
 
+				// handle building of the pager
+				var ul = $(".carousel-holder ul", $this);
+				var lis = $("li", ul);
+				var liw = $(lis[0]).outerWidth();
+				ul.width(liw*lis.length); // set the correct width whilst we're here
+				var ulw = ul.outerWidth();
+				totalPages = Math.round(ulw/liw/settings.perpage);
+					
+				if(settings.showPager) {
+					for(var i = 0; i < totalPages; i++)
+					{
+						$(".controls", $this).append("<li><a href=\"#\"></a></li>");
+					}
+					$(".controls li:first-child", $this).addClass("selected");
 
-                // handle building of the pager
-                var ul = $(".carousel-holder ul", $this);
-                var lis = $("li", ul);
-                var liw = $(lis[0]).outerWidth();
-                ul.width(liw*lis.length); // set the correct width whilst we're here
-                var ulw = ul.outerWidth();
-                totalPages = ulw/liw/settings.perpage;
-                for(var i = 0; i < totalPages; i++)
-                {
-                    $(".controls", $this).append("<li><a href=\"#\"></a></li>");
-                }
-                $(".controls li:first-child", $this).addClass("selected");
+					// set up the events for the pager
+					$(".controls li a", $this).click(function () {
 
-                // set up the events for the pager
-                $(".controls li a", $this).click(function () {
+						if(!$(".carousel-holder ul", $this).is(":animated"))
+						{
+							// adjust the margin
+							var index = $(this).parent().index();
+							var newPage = index+1;
+							$this.dcCarousel("changePage", newPage);
+							currentPage = newPage;
+						}
 
-                    if(!$(".carousel-holder ul", $this).is(":animated"))
-                    {
-                        // adjust the margin
-                        var index = $(this).parent().index();
-    //                    var interval = 800;
-    //                    $(".carousel-holder ul", obj).animate({'margin-left': (index*-1*interval) + 'px'}, 1000);
-                        var newPage = index+1;
-                        $this.dcCarousel("changePage", newPage);
-                        currentPage = newPage;
-                    }
-
-                    return false;
-                });
+						return false;
+					});
+				}
 
                 // handle left/right arrows
                 $(".carousel-holder .arrowl", $this).click(function () {
@@ -87,14 +91,25 @@
 
                     return false;
                 });
+				
+				console.log(totalPages);
+				if(settings.startPage > 1 && settings.startPage <= totalPages) {
+					$this.dcCarousel("changePage", settings.startPage, false);
+				}
 
             });
         },
-        changePage: function (page) {
+        changePage: function (page, animate) {
             this.each(function () {
 
-                // animate the slide!
-                $(".carousel-holder ul", $(this)).animate({'margin-left': ((page-1)*-1*settings.width) + 'px'}, 1000);
+				var ml = ((page-1)*-1*settings.width) + 'px';
+				
+                // animate the slide if we want to!
+				if(animate != false) {
+					$(".carousel-holder ul", $(this)).animate({'margin-left': ml}, settings.animationSpeed, settings.animationType);
+				} else {
+					$(".carousel-holder ul").css({'margin-left': ml});
+				}
 
                 // update the paging icon!
                 $(".controls li.selected", $(this)).removeClass("selected");
