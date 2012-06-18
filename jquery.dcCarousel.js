@@ -13,6 +13,8 @@
 				,'animationSpeed': 1000
 				,'animationType': 'swing'
 				,'startPage': 1
+				,'onPageChangeStart': null
+				,'onPageChangeEnd': null
             }, options);
 
             var self = this;
@@ -105,7 +107,14 @@
 				
                 // animate the slide if we want to!
 				if(animate != false) {
-					$(".carousel-holder ul", $(this)).animate({'margin-left': ml}, settings.animationSpeed, settings.animationType);
+					if(jQuery.isFunction(settings.onPageChangeStart)) {
+						settings.onPageChangeStart.call(this, page);
+					}
+					$(".carousel-holder ul", $(this)).animate({'margin-left': ml}, settings.animationSpeed, settings.animationType, function () {
+						if(jQuery.isFunction(settings.onPageChangeEnd)) {
+							settings.onPageChangeEnd.call(this, page);
+						}
+					});
 				} else {
 					$(".carousel-holder ul").css({'margin-left': ml});
 				}
