@@ -1,11 +1,11 @@
-dcCarousel - a jQuery carousel plugin
+The jQuery carousel plugin
 ====================
 
 A jQuery plugin to create a carousel. Extremely lightweight (< 2kb), easily customizable using CSS.
 
 Screenshot
 ---------------------
-![Screenshot](/deanc/dcCarousel/raw/master/screenshot.png "Screenshot")
+![Screenshot](https://raw.github.com/deanc/jQuery-Carousel/master/screenshot.png "Screenshot")
 
 Usage
 ---------------------
@@ -45,11 +45,11 @@ Add the following html to your page:
 	
 Add this to your `$(document).ready` function:
 
-	$("#carousel").dcCarousel();
+	$("#carousel").carousel();
 	
 Or with options:
 
-	$("#carousel").dcCarousel({showPager: false});
+	$("#carousel").carousel({showPager: false});
 	
 Options
 ---------------------

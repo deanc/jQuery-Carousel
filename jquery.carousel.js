@@ -46,7 +46,7 @@
 							// adjust the margin
 							var index = $(this).parent().index();
 							var newPage = index+1;
-							$this.dcCarousel("changePage", newPage);
+							$this.carousel("changePage", newPage);
 							currentPage = newPage;
 						}
 
@@ -60,7 +60,7 @@
                     if(!carousel.is(":animated")) {
                         if(currentPage > 1) {
                             var newPage = currentPage-1;
-                            $this.dcCarousel("changePage", currentPage-1);
+                            $this.carousel("changePage", currentPage-1);
                             currentPage = newPage;
                         }
                     }
@@ -71,7 +71,7 @@
                     if(!carousel.is(":animated")) {
                         if(currentPage < totalPages) {
                             var newPage = currentPage+1;
-                            $this.dcCarousel("changePage", newPage);
+                            $this.carousel("changePage", newPage);
                             currentPage = newPage;
                         }
                     }
@@ -95,7 +95,7 @@
                 });
 				
 				if(settings.startPage > 1 && settings.startPage <= totalPages) {
-					$this.dcCarousel("changePage", settings.startPage, false);
+					$this.carousel("changePage", settings.startPage, false);
 				}
 
             });
@@ -127,7 +127,7 @@
         }
     };
 
-    $.fn.dcCarousel = function( method ) {
+    $.fn.carousel = function( method ) {
 
         // Method calling logic
         if ( methods[method] ) {
